@@ -1,0 +1,6 @@
+{
+  "name": "VoxSage AI — Contrastive Speech Analytics",
+  "description": "Analyze the sound. Find the flaw. Master the delivery. Contrastive speech analytics and temporal flaw grounding.",
+  "requestFramePermissions": ["microphone"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
