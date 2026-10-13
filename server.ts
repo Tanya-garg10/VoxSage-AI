@@ -40,7 +40,8 @@ app.use('/api/samples', express.static(path.join(__dirname, 'public', 'samples')
 function runPythonCli(args: string[]): Promise<any> {
   return new Promise((resolve, reject) => {
     const scriptPath = path.join(__dirname, 'backend', 'cli_runner.py');
-    const py = spawn('python3', [scriptPath, ...args]);
+    const pythonCmd = process.env.PYTHON_CMD || (process.platform === 'win32' ? 'python' : 'python3');
+    const py = spawn(pythonCmd, [scriptPath, ...args]);
     let stdout = '';
     let stderr = '';
 
