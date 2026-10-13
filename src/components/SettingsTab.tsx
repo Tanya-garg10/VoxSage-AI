@@ -195,7 +195,7 @@ export const SettingsTab: React.FC = () => {
                 Runtime Diagnostics
               </h3>
               <p className="text-xs text-slate-500 mt-0.5">
-                Active execution environment for Multimodal Hackathon Track C
+                Active execution environment for Contrastive Speech Analytics
               </p>
             </div>
           </div>

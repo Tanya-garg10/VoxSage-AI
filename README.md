@@ -1,148 +1,135 @@
-# VoxSage AI — Premium Editorial Pro Speech Intelligence
+# VoxSage AI — Contrastive Speech Intelligence & Temporal Flaw Grounding
 
-> **Tagline:** Analyze the sound. Find the flaw. Master the delivery.  
-> **Design Language:** Premium Editorial Pro (Warm Ivory `#F7F5F0`, Off-White `#FFFEFB`, Deep Charcoal `#242522`, Playfair Display serif headings, `#4E8BBD` reference blue & `#D97757` comparison coral)  
-> **Hackathon:** Multimodal AI Hackathon 2026 — Track C: Contrastive Speech Analytics & Temporal Flaw Grounding
+> **Analyze the sound. Find the flaw. Master the delivery.**
 
----
-
-## 1. Visual Identity & Editorial Design System
-
-- **Warm Ivory Palette:**
-  - Main background: `#F7F5F0`
-  - Card background: `#FFFEFB`
-  - Primary text: `#242522`
-  - Secondary text: `#77766F`
-  - Subtle hairline borders: `#E6E2D9`
-  - Primary accent: `#6558D9`
-  - Reference audio waveform: `#4E8BBD` (Editorial Blue)
-  - Comparison audio waveform: `#D97757` (Warm Terracotta / Coral)
-  - Success states: `#4E826B` (Sage Green)
-- **Editorial Typography:**
-  - Expressive headlines: **Playfair Display** (52–64px desktop hero, 32–40px page titles)
-  - Crisp interface & body: **Inter** and **Plus Jakarta Sans**
-  - Timestamps and numeric telemetry: **JetBrains Mono**
+VoxSage AI is a contrastive speech analytics and temporal flaw grounding platform. It empowers speakers, coaches, and researchers to compare oral deliveries against reference orations, pinpoint micro-acoustic imperfections with millisecond precision, and practice actionable delivery improvements directly in the browser.
 
 ---
 
-## 2. Core Layout Architecture
+## Key Highlights
 
-1. **Top Navigation (`TopNav.tsx`)**
-   - Sound-wave brand symbol with **VoxSage Pro** typography.
-   - Core links: **Workspace**, **Dataset Lab**, **Evaluation**, and **Speaker Profile**.
-   - Interactive user avatar button (`GT`) linking directly to profile & calibration.
-   - Primary `+ New Analysis` action button.
-   - Real-time DSP indicator (`● 16kHz PCM · DTW Active`).
-
-2. **Main Workspace Dashboard (`MainWorkspaceView.tsx`)**
-   - Eyebrow: `SPEECH INTELLIGENCE / WORKSPACE`
-   - Hero Headline: **“Hear what matters.”**
-   - Supporting text: *“Compare delivery, locate vocal patterns, and turn observations into clear, timestamped coaching.”*
-   - Four compact, data-backed metric cards:
-     1. Recordings Analyzed (live count from corpus)
-     2. Delivery Score (DTW acoustic match / 100)
-     3. Issues Found (grounded temporal intervals)
-     4. Dataset Pairs (curated benchmark pairs)
-
-3. **Recording Comparison Workspace (`RecordingComparisonWorkspace.tsx`)**
-   - The visual centerpiece!
-   - Side-by-side Reference (`#4E8BBD` blue) and Comparison (`#D97757` coral) audio panels.
-   - Real interactive waveform scrubbers, playback/pause, duration, and flaw interval highlights.
-
-4. **Delivery Notes Panel (`DeliveryNotesPanel.tsx`)**
-   - Beside the comparison workspace.
-   - Timestamped flaw cards with severity, measured acoustic discrepancy, empirical evidence, and actionable coaching tips.
-   - Instant seek buttons that jump the audio player to the flawed interval.
-
-5. **Interactive Temporal Issue Timeline (`TemporalIssueTimeline.tsx`)**
-   - Full-width timeline directly beneath the comparison workspace.
-   - Timestamp ticks, colored flaw intervals, and animated playhead.
-   - Clicking any interval immediately seeks audio playback to that exact second.
-
-6. **Speaker Profile & Vocal Calibration (`ProfileView.tsx`)**
-   - Speaker credentials (Tanya Garg · `gargtanya290@gmail.com` · Verified Speaker).
-   - Session delivery trajectory chart tracking score improvement across sessions (+16.0% progress).
-   - Automated vocal tendencies panel (clause-terminal hesitation, pitch inflection patterns, projection strength).
-   - Tunable vocal baselines: $F_0$ pitch center (Hz), target speaking cadence (WPM), pause hesitation floor (seconds), and minimum energy targets.
-
-7. **Analyze Speech Workflow (`AnalyzeView.tsx`)**
-   - Drag-and-drop file upload (WAV 16/24-bit PCM, FLAC, MP3, OGG up to 25MB).
-   - Live microphone recording with second counter.
-   - Extracted acoustics: Speaking rate (WPM / syl/s), F0 semitone range, silence/pause distribution, and dynamic RMS range.
-
-8. **Dataset Lab (`DatasetLabView.tsx`)**
-   - Corpus browser with search, split filters, and human vs. synthetic tags.
-   - Documented JSON schema drawer and functional JSON export.
-
-9. **Model Evaluation (`EvaluationView.tsx`)**
-   - Reproducible empirical validation: Precision, Recall, F1 score, Mean IoU.
-   - Category breakdowns and documented failure cases with engineering remediations.
+- **Dual Waveform Contrastive Analysis**: Side-by-side reference and participant audio alignment using Dynamic Time Warping (DTW) across energy, pitch ($F_0$), and spectral features.
+- **Millisecond-Grounded Flaw Detection**: Automatically localizes and categorizes speech flaws—such as unnatural pauses, vocal fades, rushed pacing, monotone pitch, and cadence irregularities.
+- **Replay & Improve Studio**:
+  - Interactive interval playback with instant A/B track switching (Reference vs. Flawed).
+  - Loop segments for focused auditory ear-training.
+  - In-browser microphone rehearsal with real-time Web Audio input monitoring and standardized 16-bit PCM WAV encoding.
+  - Objective before-and-after progress telemetry and session persistence.
+- **Explainable Acoustic Metrics**: Quantifies physical acoustic telemetry (duration, pitch range in semitones, RMS projection, and pause duration) with clear coaching feedback.
+- **Curated Benchmark Dataset**: Includes contrastive speech pairs with ground-truth temporal intervals spanning multiple domains (Tech Keynotes, Pitches, Debates, Podcasts).
+- **Rigorous Evaluation Suite**: Measures temporal IoU, precision, recall, and F1 scores against benchmark ground-truth flaw intervals.
 
 ---
 
-## 3. Signature Feature: Replay & Improve Studio (`ReplayImproveStudio.tsx`)
+## System Architecture
 
-The centerpiece coaching engine that turns speech analytics into tangible vocal improvement:
+The application is structured into two complementary layers:
 
-1. **Precision Flaw Replay & A/B Switching:**
-   - Click any timestamped flaw card to seek immediately to that millisecond.
-   - Highlights the exact interval on the acoustic timeline (`[flaw.startTime, flaw.endTime]`).
-   - Listen to **Track A (Master Reference)** vs. **Track B (Flawed Delivery)** with seamless A/B quick-switching.
-   - Interval Looping toggle (`🔁 Loop Segment`) for repetitive auditory ear-training.
+1. **Frontend (React 19 + TypeScript + Vite + Tailwind CSS)**:
+   - Synchronized dual-audio waveform visualization and scrubbing.
+   - Interactive temporal issue timeline with seek-to-interval triggers.
+   - Live microphone recording with real-time DSP level visualization.
+   - Clean, editorial-grade user interface.
 
-2. **Explainable Flaw Detector & Deep Evidence:**
-   - Detailed acoustic telemetry: $F_0$ pitch inflection (Hz), RMS energy projection, pause duration, and MFCC divergence.
-   - Honest acoustic explanation: Distinguishes physical acoustic measurements (e.g., duration, pitch range) from subjective aesthetic judgments.
-   - Tailored vocal drill formulation: Cadence reset drills, metronome syllable pacing, diaphragmatic projection drills, and resonance glides.
-
-3. **In-Browser Microphone Practice:**
-   - Real-time `MediaRecorder` with 3-second visual countdown.
-   - Live Web Audio `AnalyserNode` input level meter.
-   - Automatic browser-side conversion from raw audio blobs into standardized 16-bit PCM WAV (`audioEncoder.ts`) for 100% backend DSP fidelity.
-
-4. **Before vs. After Measured Progress:**
-   - Real comparison of the user's new attempt against the flawed recording and master reference.
-   - Measured acoustic shift (% convergence toward master cadence/pitch tolerance).
-   - Instant coaching assessment.
-
-5. **Progress Passport (Local Persistence):**
-   - Saves session attempts to `localStorage` (`voxsage_practice_passport_v1`).
-   - Full history log with date, flaw category, status (`improved`, `steady`, `needs_review`), and coaching assessment.
-   - Export session history as formatted JSON.
-   - Clear history functionality with confirmation.
+2. **Backend (Python 3.11 + FastAPI + Librosa + NumPy + SciPy)**:
+   - High-fidelity 16kHz mono audio preprocessing.
+   - Dynamic Time Warping (DTW) for non-linear temporal sequence alignment.
+   - Acoustic parameter extraction: fundamental frequency ($F_0$ via pyin), RMS energy envelopes, and spectral roll-off/tilt.
+   - Rule-based and threshold-driven flaw grounding engine.
 
 ---
 
-## 4. Technology Stack
+## Getting Started
 
-- **Frontend:** React 19, Vite 8, Tailwind CSS v4, Recharts, Lucide React, HTML5 Audio API, Web Audio AnalyserNode.
-- **Backend:** Python 3.11, FastAPI, Librosa, NumPy, SciPy, SoundFile, Pydantic v2.
-- **Unified Server:** Node.js / Express on port 3000 mounting Vite in development and routing API requests to Python DSP CLI runner.
-- **Audio Standards:** 16,000 Hz Mono PCM WAV with downsampled 50ms temporal frames.
+### Prerequisites
 
----
+- **Node.js** (v18 or higher) & **npm**
+- **Python** (v3.10 or higher) & **pip**
 
-## 5. Setup & Running Instructions
+### Installation
+
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/Tanya-garg10/VoxSage-AI.git
+   cd VoxSage-AI
+   ```
+
+2. **Install frontend dependencies**:
+   ```bash
+   npm install
+   ```
+
+3. **Install Python backend dependencies**:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+4. **Generate sample audio benchmarks** (if not already present):
+   ```bash
+   python scripts/generate_sample_audio.py
+   ```
+
+### Running the Application
+
+Start the unified development server:
 
 ```bash
-# 1. Install dependencies
-npm install
-pip install -r requirements.txt
-
-# 2. Generate benchmark WAV sample files
-python3 scripts/generate_sample_audio.py
-
-# 3. Start unified server on port 3000
 npm run dev
 ```
 
-Visit `http://localhost:3000` to launch VoxSage AI.
+Open your browser and navigate to:
+```text
+http://localhost:3000
+```
 
 ---
 
-## 6. Known Limitations & Architecture Notes
+## Benchmark Dataset
 
-- **Microphone Permissions:** Requires standard browser microphone permissions via `navigator.mediaDevices.getUserMedia`. If denied or run in non-secure HTTP contexts, the studio clearly displays actionable permission instructions.
-- **Local Persistence Scope:** The Progress Passport currently stores history in browser `localStorage`. Data persists across page reloads on the same machine, but requires a cloud database for cross-device synchronization.
-- **Acoustic Objectivity:** Measurements quantify physical acoustic properties (timing, fundamental frequency, amplitude envelopes). They provide formative practice feedback, not subjective judgments of personal voice quality.
+VoxSage AI includes a curated contrastive dataset located in `dataset/`:
+- `dataset/annotations/benchmark_pairs.json`: Ground-truth annotations detailing reference files, participant deliveries, flaw categories, and millisecond start/end intervals.
+- `dataset/examples/`: Sample 16kHz PCM audio pairs across diverse speaking domains (Keynotes, Debates, Training sessions).
+
+### Flaw Categories Grounded
+
+| Category | Description | Primary Metric |
+| :--- | :--- | :--- |
+| `excessive_pauses` | Unnatural silence disrupting flow | Pause duration > 0.8s vs. continuous reference |
+| `rushed_delivery` | Speaking rate significantly above baseline | Syllables/sec increase > 25% |
+| `monotone_pitch` | Flat pitch contour across expressive segments | $F_0$ dynamic range < 2.0 semitones |
+| `vocal_fade` | Loss of breath support / energy at phrase ends | RMS energy drop > 40% at phrase terminals |
+| `articulation_mismatch` | Consonant muffling or spectral tilt shift | High-frequency spectral centroid divergence |
+
+---
+
+## Project Structure
+
+```text
+voxsage-ai/
+├── backend/
+│   ├── analysis/         # Audio loading, feature extraction (F0, RMS, pauses)
+│   ├── comparison/       # DTW alignment & deviation detection algorithms
+│   ├── evaluation/       # Benchmark evaluator & synthetic test generator
+│   ├── schemas/          # Pydantic data schemas
+│   ├── cli_runner.py     # Python CLI bridge for DSP execution
+│   └── main.py           # FastAPI application endpoints
+├── dataset/
+│   ├── annotations/      # benchmark_pairs.json with ground-truth intervals
+│   └── examples/         # Benchmark WAV files
+├── public/samples/       # Static audio samples for frontend playback
+├── scripts/              # Dataset generation and helper scripts
+├── src/
+│   ├── components/       # UI components (Workspace, Timeline, Studio, Lab)
+│   ├── services/         # API integration client
+│   ├── types/            # TypeScript interfaces and data models
+│   └── utils/            # Audio encoder (PCM WAV) and helpers
+├── server.ts             # Unified Express dev server mounting Vite & API proxy
+└── package.json
+```
+
+---
+
+## License
+
+This project is open-source and available under the [MIT License](LICENSE).
 

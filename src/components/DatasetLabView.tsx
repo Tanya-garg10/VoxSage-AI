@@ -73,7 +73,7 @@ export const DatasetLabView: React.FC<Props> = ({ datasetItems, onLoadPairInWork
       <div className="border-b border-[#E6E2D9] pb-6 flex flex-col sm:flex-row sm:items-baseline justify-between gap-4">
         <div>
           <span className="text-[11px] font-mono font-bold tracking-widest uppercase text-[#6558D9]">
-            MULTIMODAL AI HACKATHON 2026 / TRACK C
+            VOXSAGE BENCHMARK DATASET / CONTRASTIVE SPEECH
           </span>
           <h2 className="font-serif-editorial text-3xl sm:text-4xl font-bold text-[#242522] mt-1">
             Dataset Lab

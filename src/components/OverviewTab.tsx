@@ -43,7 +43,7 @@ export const OverviewTab: React.FC<Props> = ({ onSelectTab, datasetItems, onLoad
         <div className="max-w-3xl relative z-10 space-y-6">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#635BFF]/10 text-[#635BFF] text-xs font-semibold">
             <span className="w-1.5 h-1.5 rounded-full bg-[#635BFF]" />
-            <span>Multimodal AI Hackathon 2026 · Track C Finalist</span>
+            <span>Contrastive Speech Analytics & Flaw Grounding</span>
           </div>
 
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-tight leading-[1.1] font-display">

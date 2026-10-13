@@ -29,7 +29,7 @@ export const Header: React.FC<Props> = ({ activeTabTitle, onOpenMobileMenu, anal
         </div>
       </div>
 
-      {/* Right: Engine status, hackathon track badge, profile */}
+      {/* Right: Engine status, speech intelligence badge, profile */}
       <div className="flex items-center gap-3">
         {/* Real-time DSP engine status badge */}
         <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-50 border border-slate-200/90 text-xs">
@@ -38,17 +38,17 @@ export const Header: React.FC<Props> = ({ activeTabTitle, onOpenMobileMenu, anal
           <span className="font-semibold text-slate-800 font-mono">16kHz PCM · DTW Active</span>
         </div>
 
-        {/* Hackathon Track Tag */}
+        {/* Contrastive Speech Intelligence Tag */}
         <div className="hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#635BFF]/8 text-[#635BFF] border border-[#635BFF]/20 text-xs font-semibold">
           <Award className="w-3.5 h-3.5" />
-          <span>Track C · Temporal Flaw Grounding</span>
+          <span>Contrastive Speech Intelligence</span>
         </div>
 
         {/* Profile Avatar */}
         <div className="flex items-center gap-2 pl-1 sm:pl-2">
           <div
             className="w-8 h-8 rounded-full bg-gradient-to-tr from-[#635BFF] to-[#3898FF] text-white flex items-center justify-center text-xs font-bold shadow-xs select-none"
-            title="Logged in as gargtanya290@gmail.com"
+            title="Speaker Profile"
           >
             GT
           </div>

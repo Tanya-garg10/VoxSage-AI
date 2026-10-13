@@ -109,7 +109,7 @@ export const ProfileView: React.FC<Props> = ({
         </div>
       </div>
 
-      {/* Identity Card & Hackathon Credentials */}
+      {/* Identity Card & Speaker Credentials */}
       <div className="editorial-card-elevated rounded-2xl p-6 sm:p-8 space-y-6">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6 pb-6 border-b border-[#E6E2D9]">
           <div className="flex items-center gap-4">
@@ -130,7 +130,7 @@ export const ProfileView: React.FC<Props> = ({
                 <span>{speakerEmail}</span>
               </p>
               <p className="text-xs text-[#6558D9] font-medium mt-1">
-                Multimodal AI Hackathon 2026 · Track C Finalist Contestant
+                VoxSage Pro Speaker · Certified Orator
               </p>
             </div>
           </div>

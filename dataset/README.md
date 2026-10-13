@@ -1,6 +1,6 @@
 # VoxSage Contrastive Speech Dataset
 
-This directory contains the contrastive speech dataset for **Multimodal AI Hackathon 2026, Track C: Contrastive Speech Analytics & Temporal Flaw Grounding**.
+This directory contains the curated contrastive speech dataset for **VoxSage AI: Contrastive Speech Analytics & Temporal Flaw Grounding**.
 
 ## 1. Dataset Schema
 
