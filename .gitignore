@@ -6,6 +6,8 @@ coverage/
 *.log
 .env*
 !.env.example
+temp_uploads/
+temp_*.wav
 
 # Python
 __pycache__/

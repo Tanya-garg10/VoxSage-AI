@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: voxsage-ai
+    env: node
+    plan: free
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PYTHON_CMD
+        value: python3

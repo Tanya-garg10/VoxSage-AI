@@ -129,6 +129,37 @@ voxsage-ai/
 
 ---
 
+## Deployment
+
+### Deploy to Render
+
+VoxSage AI can be deployed to Render with the following steps:
+
+1. **Push your code to GitHub** (if not already done)
+2. **Create a new Web Service on Render**:
+   - Go to [dashboard.render.com](https://dashboard.render.com)
+   - Click "New +" → "Web Service"
+   - Connect your GitHub repository
+3. **Configure build settings**:
+   - Build Command: `npm install && npm run build`
+   - Start Command: `npm start`
+   - Runtime: Node (18+)
+4. **Add Environment Variables**:
+   - `NODE_ENV`: `production`
+   - `PYTHON_CMD`: `python3`
+   - `FEATHERLESS_API_KEY`: (optional, if using AI features)
+5. **Deploy**: Click "Create Web Service"
+
+The `render.yaml` file in the repository provides default configuration.
+
+### Alternative Deployment Options
+
+- **Docker**: Containerize the application for deployment to any cloud provider
+- **Railway**: Similar to Render, supports multi-language runtimes
+- **VPS**: Self-host on DigitalOcean, AWS EC2, or similar
+
+---
+
 ## License
 
 This project is open-source and available under the [MIT License](LICENSE).
