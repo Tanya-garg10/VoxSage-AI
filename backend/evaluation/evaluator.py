@@ -31,30 +31,84 @@ class BenchmarkEvaluator:
 
         return intersection / union
 
-    def evaluate_test_set(self, test_items: List[DatasetItem], predicted_deviations_by_id: Dict[str, List[Any]]) -> EvaluationMetricReport:
+    def _evaluate_subset(self, items: List[DatasetItem], predicted_deviations_by_id: Dict[str, List[Any]]) -> DetectionMetrics:
+        if not items:
+            return DetectionMetrics(
+                iouThreshold=self.iou_threshold,
+                precision=0.0,
+                recall=0.0,
+                f1Score=0.0,
+                meanIoU=0.0,
+            )
+
         total_gt = 0
         total_pred = 0
         true_positives = 0
         ious: List[float] = []
 
-        cat_gt: Dict[str, int] = {}
-        cat_tp: Dict[str, int] = {}
-        cat_pred: Dict[str, int] = {}
-
-        synthetic_count = sum(1 for item in test_items if item.isSynthetic)
-        human_count = sum(1 for item in test_items if not item.isSynthetic)
-
-        flaw_category_counts: Dict[str, int] = {}
-        for item in test_items:
-            flaw_category_counts[item.flawCategory] = flaw_category_counts.get(item.flawCategory, 0) + 1
-
-        for item in test_items:
+        for item in items:
             preds = predicted_deviations_by_id.get(item.id, [])
             total_pred += len(preds)
             gts = item.groundTruthIntervals
             total_gt += len(gts)
 
+            matched_preds = set()
+            for gt in gts:
+                best_iou = 0.0
+                best_p_idx = -1
+                for p_idx, p in enumerate(preds):
+                    if p_idx in matched_preds:
+                        continue
+                    p_s = getattr(p, "startTime", p.get("startTime", 0.0) if isinstance(p, dict) else 0.0)
+                    p_e = getattr(p, "endTime", p.get("endTime", 0.0) if isinstance(p, dict) else 0.0)
+                    iou = self.compute_interval_iou(gt.start, gt.end, p_s, p_e)
+
+                    gt_center = (gt.start + gt.end) / 2.0
+                    p_center = (p_s + p_e) / 2.0
+                    center_dist = abs(gt_center - p_center)
+
+                    if iou >= self.iou_threshold or (center_dist <= self.temporal_tolerance_sec and iou > 0.15):
+                        if iou > best_iou:
+                            best_iou = iou
+                            best_p_idx = p_idx
+
+                if best_p_idx != -1:
+                    true_positives += 1
+                    matched_preds.add(best_p_idx)
+                    ious.append(max(best_iou, 0.45))
+
+        prec = (true_positives / total_pred) if total_pred > 0 else 0.0
+        rec = (true_positives / total_gt) if total_gt > 0 else 0.0
+        f1 = (2 * prec * rec / (prec + rec)) if (prec + rec) > 0 else 0.0
+        mean_iou = float(np.mean(ious)) if ious else 0.0
+
+        return DetectionMetrics(
+            iouThreshold=self.iou_threshold,
+            precision=round(prec, 3),
+            recall=round(rec, 3),
+            f1Score=round(f1, 3),
+            meanIoU=round(mean_iou, 3),
+        )
+
+    def evaluate_test_set(self, test_items: List[DatasetItem], predicted_deviations_by_id: Dict[str, List[Any]]) -> EvaluationMetricReport:
+        synthetic_items = [item for item in test_items if item.isSynthetic]
+        human_items = [item for item in test_items if not item.isSynthetic]
+
+        overall_metrics = self._evaluate_subset(test_items, predicted_deviations_by_id)
+        synthetic_metrics = self._evaluate_subset(synthetic_items, predicted_deviations_by_id)
+        human_metrics = self._evaluate_subset(human_items, predicted_deviations_by_id)
+
+        # Flaw category counts & breakdown
+        flaw_category_counts: Dict[str, int] = {}
+        cat_gt: Dict[str, int] = {}
+        cat_tp: Dict[str, int] = {}
+        cat_pred: Dict[str, int] = {}
+
+        for item in test_items:
             cat = item.flawCategory
+            flaw_category_counts[cat] = flaw_category_counts.get(cat, 0) + 1
+            preds = predicted_deviations_by_id.get(item.id, [])
+            gts = item.groundTruthIntervals
             cat_gt[cat] = cat_gt.get(cat, 0) + len(gts)
             cat_pred[cat] = cat_pred.get(cat, 0) + len(preds)
 
@@ -69,7 +123,6 @@ class BenchmarkEvaluator:
                     p_e = getattr(p, "endTime", p.get("endTime", 0.0) if isinstance(p, dict) else 0.0)
                     iou = self.compute_interval_iou(gt.start, gt.end, p_s, p_e)
 
-                    # Also accept match if centers are within temporal tolerance
                     gt_center = (gt.start + gt.end) / 2.0
                     p_center = (p_s + p_e) / 2.0
                     center_dist = abs(gt_center - p_center)
@@ -80,17 +133,9 @@ class BenchmarkEvaluator:
                             best_p_idx = p_idx
 
                 if best_p_idx != -1:
-                    true_positives += 1
                     cat_tp[cat] = cat_tp.get(cat, 0) + 1
                     matched_preds.add(best_p_idx)
-                    ious.append(max(best_iou, 0.45))
 
-        precision = (true_positives / total_pred) if total_pred > 0 else 0.0
-        recall = (true_positives / total_gt) if total_gt > 0 else 0.0
-        f1 = (2 * precision * recall / (precision + recall)) if (precision + recall) > 0 else 0.0
-        mean_iou = float(np.mean(ious)) if ious else 0.0
-
-        # Category breakdown
         breakdown: List[CategoryEvaluation] = []
         for cat, count in cat_gt.items():
             tp_c = cat_tp.get(cat, 0)
@@ -108,7 +153,7 @@ class BenchmarkEvaluator:
                 )
             )
 
-        # Failure cases analysis (documenting concrete edge cases and acoustic boundary limitations)
+        # Documented failure case analysis
         failure_cases = [
             FailureCase(
                 caseId="FAIL-01-SHORT-PAUSE",
@@ -133,15 +178,11 @@ class BenchmarkEvaluator:
         return EvaluationMetricReport(
             testSetSize=len(test_items),
             flawCategoryCounts=flaw_category_counts,
-            syntheticSampleCount=synthetic_count,
-            humanSampleCount=human_count,
-            detectionMetrics=DetectionMetrics(
-                iouThreshold=self.iou_threshold,
-                precision=round(precision, 3),
-                recall=round(recall, 3),
-                f1Score=round(f1, 3),
-                meanIoU=round(mean_iou, 3),
-            ),
+            syntheticSampleCount=len(synthetic_items),
+            humanSampleCount=len(human_items),
+            detectionMetrics=overall_metrics,
+            syntheticMetrics=synthetic_metrics,
+            humanMetrics=human_metrics,
             categoryBreakdown=breakdown,
             featureExtractionSuccessRate=1.0,
             failureCases=failure_cases,

@@ -104,6 +104,14 @@ class DatasetItem(BaseModel):
     isSynthetic: bool
     split: str  # train | validation | test
     notes: str
+    # Track C Standard Benchmark Fields
+    pair_id: Optional[str] = None
+    reference_file: Optional[str] = None
+    comparison_file: Optional[str] = None
+    flaw_type: Optional[str] = None
+    start_time: Optional[float] = None
+    end_time: Optional[float] = None
+    annotation_type: Optional[str] = None
 
 class DetectionMetrics(BaseModel):
     iouThreshold: float
@@ -136,6 +144,8 @@ class EvaluationMetricReport(BaseModel):
     syntheticSampleCount: int
     humanSampleCount: int
     detectionMetrics: DetectionMetrics
+    syntheticMetrics: Optional[DetectionMetrics] = None
+    humanMetrics: Optional[DetectionMetrics] = None
     categoryBreakdown: List[CategoryEvaluation]
     featureExtractionSuccessRate: float
     failureCases: List[FailureCase]

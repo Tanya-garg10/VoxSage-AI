@@ -1,10 +1,17 @@
 [
   {
-    "id": "PAIR-001-KEYNOTE",
-    "title": "Product Keynote Opening Hook",
-    "speechDomain": "Tech Keynote / Presentation",
-    "speaker": "Speaker A (Pitch Pitch / Pitch Flaw)",
+    "pair_id": "PAIR_001_PAUSE",
+    "reference_file": "sample_reference_keynote.wav",
+    "comparison_file": "speech_keynote_pause.wav",
     "transcript": "Welcome everyone. Today we are fundamentally redefining how humans interact with intelligent multimodal interfaces.",
+    "flaw_type": "excessive_pauses",
+    "start_time": 2.1,
+    "end_time": 3.4,
+    "annotation_type": "synthetic_transformation",
+    "id": "PAIR-001-KEYNOTE",
+    "title": "Product Keynote \u2014 Hesitation Pause",
+    "speechDomain": "Tech Keynote / Presentation",
+    "speaker": "Speaker A (Keynote Master Baseline)",
     "hasAudio": true,
     "referenceAudioFile": "sample_reference_keynote.wav",
     "participantAudioFile": "sample_flawed_keynote.wav",
@@ -17,16 +24,110 @@
         "label": "Abrupt hesitation between 'Today we are' and 'fundamentally redefining'"
       }
     ],
-    "isSynthetic": false,
+    "isSynthetic": true,
     "split": "test",
-    "notes": "Authentic studio speech recording of rehearsed speaker with intentional delivery hesitation flaw."
+    "notes": "Exact 1.30s silence window algorithmically injected into continuous master reference."
   },
   {
+    "pair_id": "PAIR_002_SPEED",
+    "reference_file": "sample_reference_keynote.wav",
+    "comparison_file": "speech_keynote_fast.wav",
+    "transcript": "Welcome everyone. Today we are fundamentally redefining how humans interact with intelligent multimodal interfaces.",
+    "flaw_type": "excessive_speed",
+    "start_time": 0.0,
+    "end_time": 3.6,
+    "annotation_type": "synthetic_transformation",
+    "id": "PAIR-002-KEYNOTE-SPEED",
+    "title": "Product Keynote \u2014 Rushed Delivery",
+    "speechDomain": "Tech Keynote / Presentation",
+    "speaker": "Speaker A (Keynote Speed Variant)",
+    "hasAudio": true,
+    "referenceAudioFile": "sample_reference_keynote.wav",
+    "participantAudioFile": "speech_keynote_fast.wav",
+    "flawCategory": "rushed_delivery",
+    "flawSeverity": "severe",
+    "groundTruthIntervals": [
+      {
+        "start": 0.0,
+        "end": 3.6,
+        "label": "Accelerated delivery with 31% duration compression relative to baseline clarity"
+      }
+    ],
+    "isSynthetic": true,
+    "split": "test",
+    "notes": "Controlled speed perturbation (1.45x resampling) applied to keynote master track."
+  },
+  {
+    "pair_id": "PAIR_003_FADE",
+    "reference_file": "sample_reference_keynote.wav",
+    "comparison_file": "speech_keynote_fade.wav",
+    "transcript": "Welcome everyone. Today we are fundamentally redefining how humans interact with intelligent multimodal interfaces.",
+    "flaw_type": "vocal_fade",
+    "start_time": 3.4,
+    "end_time": 5.2,
+    "annotation_type": "synthetic_transformation",
+    "id": "PAIR-003-KEYNOTE-FADE",
+    "title": "Product Keynote \u2014 Vocal Projection Fade",
+    "speechDomain": "Tech Keynote / Presentation",
+    "speaker": "Speaker A (Keynote Fade Variant)",
+    "hasAudio": true,
+    "referenceAudioFile": "sample_reference_keynote.wav",
+    "participantAudioFile": "speech_keynote_fade.wav",
+    "flawCategory": "vocal_fade",
+    "flawSeverity": "moderate",
+    "groundTruthIntervals": [
+      {
+        "start": 3.4,
+        "end": 5.2,
+        "label": "Terminal clause projection loss (>55% RMS energy attenuation)"
+      }
+    ],
+    "isSynthetic": true,
+    "split": "validation",
+    "notes": "Controlled parametric envelope attenuation simulating loss of breath support at clause terminal."
+  },
+  {
+    "pair_id": "PAIR_004_MONOTONE",
+    "reference_file": "sample_reference_keynote.wav",
+    "comparison_file": "speech_keynote_monotone.wav",
+    "transcript": "Welcome everyone. Today we are fundamentally redefining how humans interact with intelligent multimodal interfaces.",
+    "flaw_type": "monotone_pitch",
+    "start_time": 0.5,
+    "end_time": 4.8,
+    "annotation_type": "synthetic_transformation",
+    "id": "PAIR-004-KEYNOTE-MONOTONE",
+    "title": "Product Keynote \u2014 Monotone Intonation",
+    "speechDomain": "Tech Keynote / Presentation",
+    "speaker": "Speaker A (Keynote Monotone Variant)",
+    "hasAudio": true,
+    "referenceAudioFile": "sample_reference_keynote.wav",
+    "participantAudioFile": "speech_keynote_monotone.wav",
+    "flawCategory": "monotone_pitch",
+    "flawSeverity": "moderate",
+    "groundTruthIntervals": [
+      {
+        "start": 0.5,
+        "end": 4.8,
+        "label": "Compressed pitch inflection (<1.5 semitones dynamic range)"
+      }
+    ],
+    "isSynthetic": true,
+    "split": "train",
+    "notes": "Synthetic pitch modulation suppression to test F0 excursion sensitivity."
+  },
+  {
+    "pair_id": "PAIR_005_PITCH_SPEED",
+    "reference_file": "sample_reference_pitch.wav",
+    "comparison_file": "sample_flawed_pitch_fast.wav",
+    "transcript": "Every single day millions of professionals waste countless hours attempting to manually debug temporal inconsistencies in voice pipelines.",
+    "flaw_type": "excessive_speed",
+    "start_time": 0.0,
+    "end_time": 3.8,
+    "annotation_type": "synthetic_transformation",
     "id": "PAIR-002-INVESTOR-PITCH",
-    "title": "Startup Pitch Problem Statement",
+    "title": "Startup Pitch \u2014 Problem Statement Pacing",
     "speechDomain": "Investor Pitch",
     "speaker": "Speaker B (Rushed Cadence)",
-    "transcript": "Every single day millions of professionals waste countless hours attempting to manually debug temporal inconsistencies in voice pipelines.",
     "hasAudio": true,
     "referenceAudioFile": "sample_reference_pitch.wav",
     "participantAudioFile": "sample_flawed_pitch_fast.wav",
@@ -41,14 +142,50 @@
     ],
     "isSynthetic": true,
     "split": "test",
-    "notes": "Controlled speed perturbation (1.45x resampling) applied to baseline master track; synthetic label confirmed."
+    "notes": "Controlled speed perturbation (1.42x resampling) applied to investor pitch baseline track."
   },
   {
-    "id": "PAIR-003-COMMENCEMENT",
-    "title": "Commencement Inspiring Climax",
-    "speechDomain": "Ceremonial / Public Oratory",
-    "speaker": "Speaker C (Flat / Monotone Intonation)",
+    "pair_id": "PAIR_006_PITCH_PAUSE",
+    "reference_file": "sample_reference_pitch.wav",
+    "comparison_file": "speech_pitch_pause.wav",
+    "transcript": "Every single day millions of professionals waste countless hours attempting to manually debug temporal inconsistencies in voice pipelines.",
+    "flaw_type": "excessive_pauses",
+    "start_time": 2.4,
+    "end_time": 3.7,
+    "annotation_type": "synthetic_transformation",
+    "id": "PAIR-006-PITCH-PAUSE",
+    "title": "Startup Pitch \u2014 Mid-Sentence Pause",
+    "speechDomain": "Investor Pitch",
+    "speaker": "Speaker B (Hesitation Pitch)",
+    "hasAudio": true,
+    "referenceAudioFile": "sample_reference_pitch.wav",
+    "participantAudioFile": "speech_pitch_pause.wav",
+    "flawCategory": "excessive_pauses",
+    "flawSeverity": "moderate",
+    "groundTruthIntervals": [
+      {
+        "start": 2.4,
+        "end": 3.7,
+        "label": "1.30s hesitation breaking syntactic flow between 'countless hours' and 'attempting'"
+      }
+    ],
+    "isSynthetic": true,
+    "split": "validation",
+    "notes": "Inserted pause variation testing DTW warp path recovery on pitch content."
+  },
+  {
+    "pair_id": "PAIR_007_COMMENCE_MONOTONE",
+    "reference_file": "sample_reference_commence.wav",
+    "comparison_file": "sample_flawed_monotone.wav",
     "transcript": "Your courage will be tested, but your conviction must remain steadfast as you enter this next chapter of life.",
+    "flaw_type": "monotone_pitch",
+    "start_time": 1.2,
+    "end_time": 4.6,
+    "annotation_type": "human_rehearsal",
+    "id": "PAIR-003-COMMENCEMENT",
+    "title": "Commencement Address \u2014 Monotone Intonation",
+    "speechDomain": "Ceremonial / Public Oratory",
+    "speaker": "Speaker C (Flat / Monotone Orator)",
     "hasAudio": true,
     "referenceAudioFile": "sample_reference_commence.wav",
     "participantAudioFile": "sample_flawed_monotone.wav",
@@ -63,14 +200,50 @@
     ],
     "isSynthetic": false,
     "split": "test",
-    "notes": "Trained actor recording demonstrating robotic monotone delivery compared with reference vocal inflection."
+    "notes": "Authentic studio orator recording demonstrating flat robotic intonation compared with reference vocal inflection."
   },
   {
+    "pair_id": "PAIR_008_COMMENCE_FADE",
+    "reference_file": "sample_reference_commence.wav",
+    "comparison_file": "speech_commence_fade.wav",
+    "transcript": "Your courage will be tested, but your conviction must remain steadfast as you enter this next chapter of life.",
+    "flaw_type": "vocal_fade",
+    "start_time": 3.5,
+    "end_time": 5.3,
+    "annotation_type": "synthetic_transformation",
+    "id": "PAIR-008-COMMENCE-FADE",
+    "title": "Commencement Address \u2014 Projection Drop",
+    "speechDomain": "Ceremonial / Public Oratory",
+    "speaker": "Speaker C (Commencement Fade Variant)",
+    "hasAudio": true,
+    "referenceAudioFile": "sample_reference_commence.wav",
+    "participantAudioFile": "speech_commence_fade.wav",
+    "flawCategory": "vocal_fade",
+    "flawSeverity": "moderate",
+    "groundTruthIntervals": [
+      {
+        "start": 3.5,
+        "end": 5.3,
+        "label": "Energy attenuation > 50% during peroration conclusion ('chapter of life')"
+      }
+    ],
+    "isSynthetic": true,
+    "split": "validation",
+    "notes": "Controlled envelope decay at phrase boundary."
+  },
+  {
+    "pair_id": "PAIR_009_PODCAST_FADE",
+    "reference_file": "sample_reference_podcast.wav",
+    "comparison_file": "sample_flawed_fade.wav",
+    "transcript": "In this special deep-dive episode, we uncover the hidden acoustic markers that transform good speakers into great leaders.",
+    "flaw_type": "vocal_fade",
+    "start_time": 3.2,
+    "end_time": 5.1,
+    "annotation_type": "synthetic_transformation",
     "id": "PAIR-004-PODCAST-INTRO",
-    "title": "Podcast Episode Cold Open",
+    "title": "Podcast Intro \u2014 Energy Decay",
     "speechDomain": "Media / Podcasting",
     "speaker": "Speaker D (Vocal Energy Fade)",
-    "transcript": "In this special deep-dive episode, we uncover the hidden acoustic markers that transform good speakers into great leaders.",
     "hasAudio": true,
     "referenceAudioFile": "sample_reference_podcast.wav",
     "participantAudioFile": "sample_flawed_fade.wav",
@@ -88,11 +261,47 @@
     "notes": "Synthetic envelope decay simulating diaphragmatic breath loss at clause conclusion."
   },
   {
-    "id": "PAIR-005-DEBATE-REBUTTAL",
-    "title": "Parliamentary Debate Rebuttal",
-    "speechDomain": "Debate / Persuasive Rhetoric",
-    "speaker": "Speaker E (Pacing Stagnation)",
+    "pair_id": "PAIR_010_PODCAST_SPEED",
+    "reference_file": "sample_reference_podcast.wav",
+    "comparison_file": "speech_podcast_fast.wav",
+    "transcript": "In this special deep-dive episode, we uncover the hidden acoustic markers that transform good speakers into great leaders.",
+    "flaw_type": "excessive_speed",
+    "start_time": 0.0,
+    "end_time": 4.2,
+    "annotation_type": "synthetic_transformation",
+    "id": "PAIR-010-PODCAST-SPEED",
+    "title": "Podcast Intro \u2014 Accelerated Pacing",
+    "speechDomain": "Media / Podcasting",
+    "speaker": "Speaker D (Podcast Fast Variant)",
+    "hasAudio": true,
+    "referenceAudioFile": "sample_reference_podcast.wav",
+    "participantAudioFile": "speech_podcast_fast.wav",
+    "flawCategory": "rushed_delivery",
+    "flawSeverity": "moderate",
+    "groundTruthIntervals": [
+      {
+        "start": 0.0,
+        "end": 4.2,
+        "label": "Delivery velocity 38% above target conversational cadence"
+      }
+    ],
+    "isSynthetic": true,
+    "split": "train",
+    "notes": "Speed perturbation modeling rushed broadcast cold-open."
+  },
+  {
+    "pair_id": "PAIR_011_DEBATE_PAUSE",
+    "reference_file": "sample_reference_debate.wav",
+    "comparison_file": "sample_flawed_debate.wav",
     "transcript": "The opposition argues that technological disruption creates irreversible dislocation, but history tells the exact opposite story.",
+    "flaw_type": "excessive_pauses",
+    "start_time": 3.0,
+    "end_time": 4.2,
+    "annotation_type": "human_rehearsal",
+    "id": "PAIR-005-DEBATE-REBUTTAL",
+    "title": "Parliamentary Debate \u2014 Stagnant Pause",
+    "speechDomain": "Debate / Persuasive Rhetoric",
+    "speaker": "Speaker E (Natural Collegiate Debater)",
     "hasAudio": true,
     "referenceAudioFile": "sample_reference_debate.wav",
     "participantAudioFile": "sample_flawed_debate.wav",
@@ -110,11 +319,18 @@
     "notes": "Natural collegiate debater recording during spontaneous rebuttal preparation."
   },
   {
-    "id": "PAIR-006-TRAINING-MOD",
-    "title": "Corporate Compliance Module",
-    "speechDomain": "E-Learning / Instructional",
-    "speaker": "Speaker F (Microphone Proximity Mismatch)",
+    "pair_id": "PAIR_012_TRAINING_SPECTRAL",
+    "reference_file": "sample_reference_training.wav",
+    "comparison_file": "sample_flawed_spectral.wav",
     "transcript": "Please ensure that all proprietary communication adheres strictly to the security governance standards detailed in section four.",
+    "flaw_type": "articulation_mismatch",
+    "start_time": 2.2,
+    "end_time": 4.8,
+    "annotation_type": "human_rehearsal",
+    "id": "PAIR-006-TRAINING-MOD",
+    "title": "Corporate Compliance \u2014 Articulation Deviation",
+    "speechDomain": "E-Learning / Instructional",
+    "speaker": "Speaker F (Microphone Axis Variation)",
     "hasAudio": true,
     "referenceAudioFile": "sample_reference_training.wav",
     "participantAudioFile": "sample_flawed_spectral.wav",
@@ -127,8 +343,8 @@
         "label": "Spectral tilt shift resulting from off-axis microphone head movement"
       }
     ],
-    "isSynthetic": true,
+    "isSynthetic": false,
     "split": "train",
-    "notes": "Synthetic low-pass filter transition simulating acoustic head-turn away from microphone."
+    "notes": "Natural human delivery with subtle off-axis head tilt creating consonant muffling."
   }
 ]
