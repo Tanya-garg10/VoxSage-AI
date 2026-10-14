@@ -63,7 +63,7 @@ export const EvaluationTab: React.FC = () => {
               Empirical Validation
             </span>
             <span className="text-slate-400">·</span>
-            <span className="text-xs text-slate-500 font-medium">Track C Benchmarking</span>
+            <span className="text-xs text-slate-500 font-medium">Ground Truth Benchmarking</span>
           </div>
           <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight font-display mt-1">
             Model Evaluation & Benchmarking

@@ -136,7 +136,7 @@ export const CompareTab: React.FC<Props> = ({ initialPair, onClearInitialPair })
       <div>
         <div className="flex items-center gap-2">
           <span className="px-2.5 py-0.5 rounded-full bg-[#635BFF]/10 text-[#635BFF] text-xs font-semibold">
-            Signature Track C Engine
+            Contrastive Analysis Engine
           </span>
           <span className="text-slate-400">·</span>
           <span className="text-xs text-slate-500 font-medium">DTW Temporal Grounding</span>

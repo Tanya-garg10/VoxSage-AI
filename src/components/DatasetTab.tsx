@@ -71,7 +71,7 @@ export const DatasetTab: React.FC<Props> = ({
         <div>
           <div className="flex items-center gap-2">
             <span className="px-2.5 py-0.5 rounded-full bg-[#635BFF]/10 text-[#635BFF] text-xs font-semibold">
-              Track C Corpus
+              Benchmark Corpus
             </span>
             <span className="text-slate-400">·</span>
             <span className="text-xs text-slate-500 font-medium">Contrastive Speech Dataset Lab</span>

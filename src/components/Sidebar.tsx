@@ -118,7 +118,7 @@ export const Sidebar: React.FC<Props> = ({
           <div className="p-3 rounded-xl bg-slate-50 border border-slate-200/70 mb-2.5 text-xs">
             <div className="flex items-center gap-1.5 font-semibold text-slate-800 mb-0.5">
               <BookOpen className="w-3.5 h-3.5 text-[#635BFF]" />
-              <span>Track C Specification</span>
+              <span>Speech Intelligence Docs</span>
             </div>
             <p className="text-[11px] text-slate-500 leading-relaxed">
               Temporal flaw grounding via DTW alignment & F0 intonation analysis.

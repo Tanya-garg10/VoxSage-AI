@@ -550,7 +550,7 @@ export const ReplayImproveStudio: React.FC<Props> = ({
               SPEECH COACHING / SIGNATURE EXPERIENCE
             </span>
             <span className="text-[10px] font-mono font-semibold px-2 py-0.5 rounded-full bg-[#6558D9]/10 text-[#6558D9] border border-[#6558D9]/20">
-              Track C Grounded
+              Acoustically Grounded
             </span>
           </div>
 

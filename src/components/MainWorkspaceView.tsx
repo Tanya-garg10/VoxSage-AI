@@ -155,7 +155,7 @@ export const MainWorkspaceView: React.FC<Props> = ({
           subtext="Curated benchmark pairs across speech domains"
           icon={BookOpen}
           colorScheme="neutral"
-          badge="Track C"
+          badge="Benchmark"
         />
       </div>
 
